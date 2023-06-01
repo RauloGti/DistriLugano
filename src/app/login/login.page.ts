@@ -21,4 +21,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  login(){
+    if (this.form.valid) {
+      const{ email, password } = this.form.getRawValue();
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
 }
