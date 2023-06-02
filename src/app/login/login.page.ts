@@ -22,11 +22,13 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    if (this.form.valid) {
-      const{ email, password } = this.form.getRawValue();
+    if(this.form.valid){
+      const {email, password} = this.form.getRawValue();
+      console.log(email, password);
     } else {
       this.form.markAllAsTouched();
     }
   }
+
 
 }

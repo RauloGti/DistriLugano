@@ -24,6 +24,7 @@ export class RegisterPage implements OnInit {
   register(){
     if (this.form.valid) {
       const{ email, password,confirmPassword } = this.form.getRawValue();
+      console.log(email, password);
     } else {
       this.form.markAllAsTouched();
     }

@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title size="large" class="ion-text-center"> Distrilugano - Registrarse</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Distrilugano - Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,12 +20,12 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Confirm Password</ion-label>
-        <ion-input type="confirmPassword" formControlName="password"></ion-input>
+        <ion-input type="confirmPassword" formControlName="confirmPassword"></ion-input>
       </ion-item>
     </ion-list>
     <ion-row>
       <ion-col>
-        <ion-button routerLink="/login" expand="block" type="button">Login</ion-button>
+        <ion-button routerLink="/login" routerDirection="back"  expand="block" type="button">Login</ion-button>
       </ion-col>
       <ion-col>
         <ion-button routerLink="/register" expand="block" type="submit" color="secondary">Registrarse</ion-button>
