@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "distrilugano-edd69"
+  },
+  "targets": {
+    "distrilugano-edd69": {
+      "hosting": {
+        "app": [
+          "distrilugano-edd69"
+        ]
+      }
+    }
+  }
+}
