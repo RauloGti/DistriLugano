@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,5 +17,15 @@ export class AppComponent {
     { title: 'informacion', url: '/folder/spam', icon: 'warning' },
   ];
   public labels = ['Productos', 'Agregar Productos', 'Modificar productos', 'Eliminar Productos', 'Proveedores', 'Set Provedores'];
-  constructor() {}
+  
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+  ) {}
+  
+  async logout(){
+    await this.auth.logout();
+   this.router.navigate(['/login']);
+ }
+
 }

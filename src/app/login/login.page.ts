@@ -24,12 +24,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-
-  login() {
+ login() {
     if (this.form.valid) {
       const { email, password } = this.form.getRawValue();
       if (email && password) { // Verificar si email y password no son null
-        this.auth.register(email, password)
+        this.auth.login(email, password)
           .then(() => {
             this.router.navigate(['/home']);
           })
@@ -37,6 +36,7 @@ export class LoginPage implements OnInit {
             console.error(error);
           });
       }
+
     } else {
       this.form.markAllAsTouched();
     }
