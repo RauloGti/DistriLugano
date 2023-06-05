@@ -26,21 +26,25 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    if (this.form.valid) {
-      const { email, password } = this.form.getRawValue();
-      if (email && password) { // Verificar si email y password no son null
-        this.auth.register(email, password)
-          .then(() => {
-            this.router.navigate(['/home']);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+      if (this.form.valid) {
+        const { email, password, confirmPassword } = this.form.getRawValue();
+        if (email && password) { // Verificar si email y password no son null
+          if (password !== confirmPassword){
+            console.error("Las contraseñas no son iguales");
+          } else {
+          this.auth.register(email, password)
+            .then(() => {
+              this.router.navigate(['/home']);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      } else {
+        this.form.markAllAsTouched();
       }
-    } else {
-      this.form.markAllAsTouched();
     }
-  }
+    }
   
 
 }
