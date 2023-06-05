@@ -1,0 +1,7 @@
+{
+  "name": "DistriLugano",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
