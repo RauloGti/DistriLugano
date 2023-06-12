@@ -1,0 +1,28 @@
+ion-content.register{
+    --ion-background-color:  linear-gradient(180deg, rgba(245, 7, 1, 0.83) 0%, rgba(245, 7, 1, 0.605208) 99.99%, rgba(245, 7, 1, 0) 100%);
+ }
+
+ ion-input.custom {
+    --width: 250px;
+    --background: white;
+    --border-radius:8px;
+    --color:black;
+ }
+
+ 
+ .io-center{
+     display: flex;
+     justify-content: center;
+     align-content: center;
+ }
+
+ .button-wrapper{
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+ }
+
+ .ion-valid.sc-ion-input-md-h {
+    --highlight-color: none;
+}
+ 

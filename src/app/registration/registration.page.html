@@ -1,0 +1,38 @@
+
+
+<ion-content class="ion-padding register">
+
+  <div class="io-center" >
+    <img src="./assets/icon/DistriLuganoLogo.svg"alt="" class="ion-padding">
+  </div>
+
+    <ion-label color="light">Ingrese su correo electronico</ion-label>
+
+    <ion-input
+      fill="outline"
+      [(ngModel)]="emailRegister"
+      class="custom ion-margin-top"
+      (input)="validate()"
+    ></ion-input>
+
+    <div style="margin-top: 8px">
+        <ion-label color="light" class="ion-margin-top">Ingrese su contraseña</ion-label>
+    </div>
+
+    <ion-input
+      fill="outline"
+      [(ngModel)]="passwordRegister"
+      type="password"
+      class="custom ion-margin-top"
+    ></ion-input>
+
+    <div class="io-center button-wrapper">
+      <ion-button 
+        class="ion-margin-top"
+        color="danger"
+        (click)="registerUser()">
+        Registrarse
+    </ion-button>
+    </div>
+  
+  </ion-content>
