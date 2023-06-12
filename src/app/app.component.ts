@@ -23,6 +23,7 @@ export class AppComponent {
     private router: Router,
   ) {}
   
+  //funcion que cierra sesion"importando servicio" y devuelve a el usuario a la pagina de login.
   async logout(){
     await this.auth.logout();
    this.router.navigate(['/login']);

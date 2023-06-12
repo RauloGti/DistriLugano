@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@angular/fire/auth-guard';
+import { AuthGuard , redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+//Redirije al login cuando no tiene sesion iniciada importando"redirectUnauthorizedTo"
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
@@ -20,9 +23,11 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  
   {
     path: 'home',
     canActivate: [AuthGuard],
+    data: {authGuardPipe : redirectUnauthorizedToLogin},
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   }
 ];
