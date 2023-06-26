@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>CrearRepartidor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title size="large">CrearRepartidor</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="inputNombre"  formControlName="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input [(ngModel)]="inputApellido"  formControlName="apellido" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">DNI</ion-label>
+      <ion-input [(ngModel)]="inputDni"  formControlName="dni" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input [(ngModel)]="inputTelefono"  formControlName="telefono" required></ion-input>
+    </ion-item>
+    
+  </form>
+
+  <ion-button expand="full" (click)="creardatos()" >Guardar</ion-button>
+  <ion-button expand="full" color="danger" (click)="limpiarCampos()">Cancelar</ion-button>
+</ion-content>
