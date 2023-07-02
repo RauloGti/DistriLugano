@@ -4,6 +4,12 @@ import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { Firestore, collection, getDocs, getFirestore ,getDoc,doc} from '@angular/fire/firestore';
 
+import * as pdfMake from "pdfmake/build/pdfmake";
+
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-crear-pedido',
   templateUrl: './crear-pedido.page.html',
@@ -201,10 +207,49 @@ export class CrearPedidoPage implements OnInit {
         cantidad :this.products[5].cantidad - this.pedido6
       }
     ]
-
-    console.log(listaProductos)
     
+    this.downloadStock(listaProductos)
 
+  }
+
+  formatPdfProductos(products: any){
+    var printProductsList:any=[]
+    products.forEach((lista: {
+      producto: any;
+      cantidad: any; 
+    }) => {
+      printProductsList.push({
+        table: {
+          body: [
+            [
+              'Producto',
+              'Stock',
+            ],
+            [
+              lista.producto,
+              lista.cantidad,
+            ],
+          ]
+        }
+        , margin: [ 0, 0, 0, 20 ]
+      });
+      
+    });
+    return printProductsList;   
+  }
+
+
+
+  downloadStock( lista: any){
+    let date = new Date();
+    let documentFormat = {content: [
+      {
+        text:`Lista de pedidos DistriLugano ${ date.toLocaleString() } `
+        , margin: [ 0, 0, 0, 20 ]
+      },
+      this.formatPdfProductos(lista)
+    ]};
+    pdfMake.createPdf(documentFormat).download(`Stock-${ date.toLocaleString() +'.pdf' }`)
   }
 
 
