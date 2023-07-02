@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -48,11 +48,63 @@
       </ion-select>
     </ion-item>
 
-    <!-- Otros campos del formulario -->
-    <!-- ... -->
-
-    <ion-button expand="full" >Guardar</ion-button>
-    <ion-button expand="full" color="danger" >Cancelar</ion-button>
+    <div class="lays-container" >
+      <img src="./assets/icon/PapasFritas.png" alt="Papas" class="ion-padding">
+      <img src="./assets/icon/PapasFritas.png" alt="Papas" class="ion-padding">
+      <img src="./assets/icon/PapasFritas.png" alt="Papas" class="ion-padding">
+    </div>
   </form>
- 
+
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[0].producto }}</button>
+    <button class="input-button">Stock: {{ products[0].cantidad }}</button>
+    <button class="button" (click)="agregarProducto1()">+</button>
+    <p class="number">{{pedido1}}</p>
+    <button class="button" (click)="restarProducto1()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[1].producto }}</button>
+    <button class="input-button">Stock: {{ products[1].cantidad }}</button>
+    <button class="button" (click)="agregarProducto2()">+</button>
+    <p class="number">{{pedido2}}</p>
+    <button class="button" (click)="restarProducto2()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[2].producto }}</button>
+    <button class="input-button">Stock: {{ products[2].cantidad }}</button>
+    <button class="button" (click)="agregarProducto3()">+</button>
+    <p class="number">{{pedido3}}</p>
+    <button class="button" (click)="restarProducto3()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[3].producto }}</button>
+    <button class="input-button">Stock: {{ products[3].cantidad }}</button>
+    <button class="button" (click)="agregarProducto4()">+</button>
+    <p class="number">{{pedido4}}</p>
+    <button class="button" (click)="restarProducto4()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[4].producto }}</button>
+    <button class="input-button">Stock: {{ products[4].cantidad }}</button>
+    <button class="button" (click)="agregarProducto5()">+</button>
+    <p class="number">{{pedido5}}</p>
+    <button class="button" (click)="restarProducto5()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="product-container ion-center" *ngIf="products" >
+    <button class="input-button">{{ products[5].producto }}</button>
+    <button class="input-button">Stock: {{ products[5].cantidad }}</button>
+    <button class="button" (click)="agregarProducto6()">+</button>
+    <p class="number">{{pedido6}}</p>
+    <button class="button" (click)="restarProducto6()">-</button>
+    <button class="detail-button">Detalle</button>
+  </div>
+  <div class="buttons-container">
+    <button class="button-save" (click)="guardarProductos()">Guardar</button>
+    <button class="button-cancel" >Cancelar</button>
+  </div>
 </ion-content>
