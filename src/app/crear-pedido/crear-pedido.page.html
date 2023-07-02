@@ -61,7 +61,7 @@
     <button class="button" (click)="agregarProducto1()">+</button>
     <p class="number">{{pedido1}}</p>
     <button class="button" (click)="restarProducto1()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail1(1)">Detalle</button>
   </div>
   <div class="product-container ion-center" *ngIf="products" >
     <button class="input-button">{{ products[1].producto }}</button>
@@ -69,7 +69,7 @@
     <button class="button" (click)="agregarProducto2()">+</button>
     <p class="number">{{pedido2}}</p>
     <button class="button" (click)="restarProducto2()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail(products[1].id)">Detalle</button>
   </div>
   <div class="product-container ion-center" *ngIf="products" >
     <button class="input-button">{{ products[2].producto }}</button>
@@ -77,7 +77,7 @@
     <button class="button" (click)="agregarProducto3()">+</button>
     <p class="number">{{pedido3}}</p>
     <button class="button" (click)="restarProducto3()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail(products[2].id)">Detalle</button>
   </div>
   <div class="product-container ion-center" *ngIf="products" >
     <button class="input-button">{{ products[3].producto }}</button>
@@ -85,7 +85,7 @@
     <button class="button" (click)="agregarProducto4()">+</button>
     <p class="number">{{pedido4}}</p>
     <button class="button" (click)="restarProducto4()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail(products[3].id)">Detalle</button>
   </div>
   <div class="product-container ion-center" *ngIf="products" >
     <button class="input-button">{{ products[4].producto }}</button>
@@ -93,7 +93,7 @@
     <button class="button" (click)="agregarProducto5()">+</button>
     <p class="number">{{pedido5}}</p>
     <button class="button" (click)="restarProducto5()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail(products[4].id)">Detalle</button>
   </div>
   <div class="product-container ion-center" *ngIf="products" >
     <button class="input-button">{{ products[5].producto }}</button>
@@ -101,9 +101,9 @@
     <button class="button" (click)="agregarProducto6()">+</button>
     <p class="number">{{pedido6}}</p>
     <button class="button" (click)="restarProducto6()">-</button>
-    <button class="detail-button">Detalle</button>
+    <button class="detail-button" (click)="toDetail(products[4].id)">Detalle</button>
   </div>
   <div class="buttons-container">
-    <button class="button-save" (click)="guardarProductos()">Guardar</button>
+    <button class="button-save" (click)="guardarProductos()">Imprimir pedido</button>
   </div>
 </ion-content>

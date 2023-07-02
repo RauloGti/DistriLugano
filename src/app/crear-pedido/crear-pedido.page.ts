@@ -207,9 +207,7 @@ export class CrearPedidoPage implements OnInit {
         cantidad :this.products[5].cantidad - this.pedido6
       }
     ]
-    
     this.downloadStock(listaProductos)
-
   }
 
   formatPdfProductos(products: any){
@@ -260,8 +258,11 @@ export class CrearPedidoPage implements OnInit {
  pedido5 :any = 0
  pedido6 :any = 0
 
+ toDetail(product :any){
+  this.router.navigate([`/detalle-producto/${product}`]);    
+}
 
-  cantidad(id :any){
-   
-  }
+toDetail1(id :any){
+  this.router.navigate([`/detalle-producto/${id}`]);  
+}
 }
