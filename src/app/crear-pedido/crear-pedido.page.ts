@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
-import { Firestore, collection, getDocs, getFirestore ,getDoc,doc} from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, getFirestore ,getDoc,doc, updateDoc} from '@angular/fire/firestore';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 
@@ -213,7 +213,7 @@ export class CrearPedidoPage implements OnInit {
   //   ]
   //   this.downloadStock(listaProductos)
   // }
-  guardarProductos() {
+  async guardarProductos() {
     const clienteSeleccionado = this.form.value.cliente;
     const repartidorSeleccionado = this.form.value.repartidor;
     let listaProductos: any = [
@@ -248,7 +248,20 @@ export class CrearPedidoPage implements OnInit {
         cantidad: this.products[5].cantidad - this.pedido6
       }
     ];
+
+    const db = getFirestore();
+
+
+    const productsList = doc(db, "Productos", "IdProductos");
+
+    await updateDoc(productsList, {
+      productos: listaProductos
+    }); 
+
     this.downloadStock(listaProductos, clienteSeleccionado, repartidorSeleccionado);
+
+    this.obtenerProductos();
+
   }
 
   // formatPdfProductos(products: any){
