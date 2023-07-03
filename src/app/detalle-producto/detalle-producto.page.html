@@ -2,12 +2,16 @@
 <ion-content class="detail-product ion-padding">
   <ion-label class="detail-title ion-margin-top">Detalle de producto</ion-label>
   <ion-card *ngIf="productDetailId" class="ion-margin-top" color="light">
-    <div class="io-center">
+    <div class="io-center" style="margin-top: 8px;">
       <img src='./assets/icon/PapasFritas.png' alt="" class="products-icon">
     </div>
     <ion-card-header>
       <ion-card-title>{{ productDetailId.producto }}</ion-card-title>
       <ion-card-subtitle>Stock : {{ productDetailId.cantidad }}</ion-card-subtitle>
+      <ion-card-subtitle>Informacion : {{ productDetailId.info }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
+  <div class="buttons-container">
+    <button class="button-save" (click)="toBack()">Volver</button>
+  </div>
 </ion-content>

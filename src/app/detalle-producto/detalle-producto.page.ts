@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, getDoc,getFirestore ,updateDoc } from '@angular/fire/firestore'
 import { Router } from '@angular/router';
 
+import { Location } from "@angular/common";
+
+
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +18,7 @@ export class DetalleProductoPage implements OnInit {
   constructor(
     public router:Router,
     private route: ActivatedRoute,
-
+    private location : Location,
   ) { }
 
   routeParams: any 
@@ -44,6 +47,10 @@ export class DetalleProductoPage implements OnInit {
     catch(error) {
       console.log(error)
     }
+  }
+
+  toBack(){
+    this.location.back();  
   }
 
 }
