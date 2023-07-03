@@ -18,33 +18,20 @@
   </ion-header>
 
   <form [formGroup]="form">
-    <!-- Lista desplegable para seleccionar productos (seleccionar varios) -->
-    <ion-item>
-      <ion-label>Productos</ion-label>
-      <ion-select formControlName="productos" multiple="true">
-        <ion-select-option value="producto1">Producto 1</ion-select-option>
-        <ion-select-option value="producto2">Producto 2</ion-select-option>
-        <ion-select-option value="producto3">Producto 3</ion-select-option>
-      </ion-select>
-    </ion-item>
-
     <!-- Lista desplegable para seleccionar un cliente -->
     <ion-item>
       <ion-label>Cliente</ion-label>
-      <ion-select formControlName="cliente">
-        <ion-select-option value="cliente1">Cliente 1</ion-select-option>
-        <ion-select-option value="cliente2">Cliente 2</ion-select-option>
-        <ion-select-option value="cliente3">Cliente 3</ion-select-option>
+      <ion-select formControlName="cliente" >
+        <ion-select-option [value]="cliente" *ngFor="let cliente of clientes">{{cliente.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
 
-    <!-- Lista desplegable para seleccionar un repartidor -->
+        <!-- Lista desplegable para seleccionar un repartidor  -->
+    
     <ion-item>
       <ion-label>Repartidor</ion-label>
       <ion-select formControlName="repartidor">
-        <ion-select-option value="repartidor1">Repartidor 1</ion-select-option>
-        <ion-select-option value="repartidor2">Repartidor 2</ion-select-option>
-        <ion-select-option value="repartidor3">Repartidor 3</ion-select-option>
+        <ion-select-option *ngFor="let repartidor of repartidores" [value]="repartidor">{{ repartidor.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
 

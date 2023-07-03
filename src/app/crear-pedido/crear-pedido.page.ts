@@ -23,6 +23,8 @@ export class CrearPedidoPage implements OnInit {
   datos:any;
 
   products :any
+  cliente:any;
+  repartidor:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,9 +71,9 @@ export class CrearPedidoPage implements OnInit {
       querySnapshot.forEach((doc) => {
         const cliente = {
           id: doc.id,
+          nombre: doc.data()['nombre'],
+          direccion:doc.data()['correo'] //es la dirreccion
           
-          // Otros campos del cliente
-          // ...
         };
         this.clientes.push(cliente);
       });
@@ -89,10 +91,11 @@ export class CrearPedidoPage implements OnInit {
       querySnapshot.forEach((doc) => {
         const repartidor = {
           id: doc.id,
+          nombre: doc.data()['nombre'],
+          telefono:doc.data()['telefono']
           
           
-          // Otros campos del repartidor
-          // ...
+          
         };
         this.repartidores.push(repartidor);
       });
@@ -104,7 +107,7 @@ export class CrearPedidoPage implements OnInit {
   // Resto del código de la página
   // ...
   
-
+//#region agregaciones
   agregarProducto1(){
     this.pedido1 = this.pedido1 +1
   }
@@ -171,84 +174,173 @@ export class CrearPedidoPage implements OnInit {
       this.agregarProducto6()
     }
   }
+ //#endregion
 
-  guardarProductos(){
-    let listaProductos :any
+  // guardarProductos(){
+  //   let listaProductos :any
 
-    listaProductos = [
+  //   listaProductos = [
+  //     {
+  //       id:0,
+  //       producto : "Clásicas 100gr",
+  //       cantidad :this.products[0].cantidad - this.pedido1
+  //     },
+  //     {
+  //       id:1,
+  //       producto : "Clásicas 150gr",
+  //       cantidad :this.products[1].cantidad - this.pedido2
+  //     },
+  //     {
+  //       id:2,
+  //       producto : "Clásicas 475gr",
+  //       cantidad :this.products[2].cantidad - this.pedido3
+  //     },
+  //     {
+  //       id:3,
+  //       producto : "Onduladas 100gr",
+  //       cantidad :this.products[3].cantidad - this.pedido4
+  //     },
+  //     {
+  //       id:4,
+  //       producto : "Onduladas 180gr",
+  //       cantidad :this.products[4].cantidad - this.pedido5
+  //     },
+  //     {
+  //       id:5,
+  //       producto : "Onduladas 475gr",
+  //       cantidad :this.products[5].cantidad - this.pedido6
+  //     }
+  //   ]
+  //   this.downloadStock(listaProductos)
+  // }
+  guardarProductos() {
+    const clienteSeleccionado = this.form.value.cliente;
+    const repartidorSeleccionado = this.form.value.repartidor;
+    let listaProductos: any = [
       {
-        id:0,
-        producto : "Clásicas 100gr",
-        cantidad :this.products[0].cantidad - this.pedido1
+        id: 0,
+        producto: "Clásicas 100gr",
+        cantidad: this.products[0].cantidad - this.pedido1
       },
       {
-        id:1,
-        producto : "Clásicas 150gr",
-        cantidad :this.products[1].cantidad - this.pedido2
+        id: 1,
+        producto: "Clásicas 150gr",
+        cantidad: this.products[1].cantidad - this.pedido2
       },
       {
-        id:2,
-        producto : "Clásicas 475gr",
-        cantidad :this.products[2].cantidad - this.pedido3
+        id: 2,
+        producto: "Clásicas 475gr",
+        cantidad: this.products[2].cantidad - this.pedido3
       },
       {
-        id:3,
-        producto : "Onduladas 100gr",
-        cantidad :this.products[3].cantidad - this.pedido4
+        id: 3,
+        producto: "Onduladas 100gr",
+        cantidad: this.products[3].cantidad - this.pedido4
       },
       {
-        id:4,
-        producto : "Onduladas 180gr",
-        cantidad :this.products[4].cantidad - this.pedido5
+        id: 4,
+        producto: "Onduladas 180gr",
+        cantidad: this.products[4].cantidad - this.pedido5
       },
       {
-        id:5,
-        producto : "Onduladas 475gr",
-        cantidad :this.products[5].cantidad - this.pedido6
+        id: 5,
+        producto: "Onduladas 475gr",
+        cantidad: this.products[5].cantidad - this.pedido6
       }
-    ]
-    this.downloadStock(listaProductos)
+    ];
+    this.downloadStock(listaProductos, clienteSeleccionado, repartidorSeleccionado);
   }
 
-  formatPdfProductos(products: any){
-    var printProductsList:any=[]
-    products.forEach((lista: {
-      producto: any;
-      cantidad: any; 
-    }) => {
-      printProductsList.push({
-        table: {
-          body: [
-            [
-              'Producto',
-              'Stock',
-            ],
-            [
-              lista.producto,
-              lista.cantidad,
-            ],
-          ]
-        }
-        , margin: [ 0, 0, 0, 20 ]
-      });
+  // formatPdfProductos(products: any){
+  //   var printProductsList:any=[]
+  //   products.forEach((lista: {
+  //     producto: any;
+  //     cantidad: any; 
+  //   }) => {
+  //     printProductsList.push({
+  //       table: {
+  //         body: [
+  //           [
+  //             'Producto',
+  //             'Stock',
+  //           ],
+  //           [
+  //             lista.producto,
+  //             lista.cantidad,
+  //           ],
+  //         ]
+  //       }
+  //       , margin: [ 0, 0, 0, 20 ]
+  //     });
       
-    });
-    return printProductsList;   
-  }
-
-
-
-  downloadStock( lista: any){
-    let date = new Date();
-    let documentFormat = {content: [
-      {
-        text:`Lista de pedidos DistriLugano ${ date.toLocaleString() } `
-        , margin: [ 0, 0, 0, 20 ]
+  //   });
+  //   return printProductsList;   
+  // }
+  formatPdfProductos(products: any, cliente: any, repartidor: any) {
+    var printProductsList: any[] = [];
+  
+    printProductsList.push({
+      table: {
+        widths: ['auto', 'auto'],
+        body: [
+          [
+            { text: 'Cliente:', style: 'sectionHeader' },
+            { text: cliente?.nombre || '',margin: [0, 0, 0, 10] }
+          ],
+          [
+            { text: 'Direccion:', style: 'sectionHeader' },
+            { text: cliente?.direccion ||'' ,margin: [0, 0, 0, 20] }
+          ],
+          [
+            { text: 'Repartidor:', style: 'sectionHeader' },
+            { text: repartidor?.nombre||'', margin: [0, 0, 0, 10] }
+          ],
+          [
+            { text: 'Teléfono:', style: 'sectionHeader' },
+            { text: repartidor?.telefono||'', margin: [0, 0, 0, 20] }
+          ],
+          [
+            { text: 'Productos:', style: 'sectionHeader', colSpan: 2, alignment: 'center' },
+            {}
+          ],
+          ...products.map((lista: { producto: any; cantidad: any }) => [
+            { text: lista.producto },
+            { text: lista.cantidad }
+          ])
+        ]
       },
-      this.formatPdfProductos(lista)
-    ]};
-    pdfMake.createPdf(documentFormat).download(`Stock-${ date.toLocaleString() +'.pdf' }`)
+      margin: [0, 0, 0, 20]
+    });
+  
+    return printProductsList;
   }
+
+  downloadStock(lista: any, cliente: any, repartidor: any) {
+    let date = new Date();
+    let documentFormat = {
+      content: [
+        {
+          text: `Lista de pedidos DistriLugano ${date.toLocaleString()}`,
+          margin: [0, 0, 0, 20]
+        },
+        ...this.formatPdfProductos(lista, cliente, repartidor)
+      ]
+    };
+    pdfMake.createPdf(documentFormat).download(`Stock-${date.toLocaleString()}.pdf`);
+  }
+
+
+  // downloadStock( lista: any){
+  //   let date = new Date();
+  //   let documentFormat = {content: [
+  //     {
+  //       text:`Lista de pedidos DistriLugano ${ date.toLocaleString() } `
+  //       , margin: [ 0, 0, 0, 20 ]
+  //     },
+  //     this.formatPdfProductos(lista)
+  //   ]};
+  //   pdfMake.createPdf(documentFormat).download(`Stock-${ date.toLocaleString() +'.pdf' }`)
+  // }
 
 
  pedido1 :any = 0
